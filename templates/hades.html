@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/hades.css">
+    <title>Threat Olympus</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1, h2 {
+        color: #333;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    .results-tab {
+        background-color: #282c34; /* Dark background color */
+        color: #fff; /* Text color on the dark background */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        overflow: auto;
+        max-height: 600px; /* Limit the height of the results tab */
+    }
+
+    #output-log {
+        overflow-y: scroll;
+        height: 200px; /* Set a height to make it scrollable */
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    pre {
+        white-space: pre-wrap; /* Allows text to wrap */
+        overflow: auto;
+        max-height: 300px; /* Limit the height of the results tab */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"> <img href="index.html" src="../static/images/hades.png" alt="HADES"></a>
+        <h2>HADES<br>System-Level Threat Hunter</h2>
+    </header>
+    <hr style="border: none; border-top: 3px solid black;">
+    <desc>
+        <h3>Introduction:</h3>
+        <p>
+            Hades is designed to detect and investigate potential threats at the system level. <br>
+            It leverages various techniques and algorithms to analyze system behavior and identify suspicious activities.
+        </p>
+        <h3>Usage:</h3>
+        <pre>
+         Enter any flag from below:
+            -cpu            Monitor CPU usage
+            -event          Monitor Windows log events
+            -fsm            Monitor file system events
+            -help           Show help
+            -mem            Monitor memory usage
+            -net            Monitor network events
+            -path string    path to file monitor (default ".")
+        </pre>
+        <form action="/hades" method="post">
+            <input type="text" id="url" name="flag" placeholder="Syntax: -<flag>" required>
+        
+            <button type="submit">Run Scan</button>
+          </form>
+    </desc>
+    <div id="output-log" class="results-tab">
+        <h3 color="white">Results:</h3>
+        <pre>{{.result}}</pre>
+    </div>
+    <center>
+        <footer>
+            <hr style="border: none; border-top: 3px solid black;">
+            <h4>CREATED BY <br>TEAM THREAT-OLYMPUS</h4>
+            <a href="https://github.com/Threat-Olympus"><img src="../static/images/GitHub.png" alt="GitHub" height="50px" width="50px"></a>
+        </footer>
+        <script>
+            function fetchData() {
+                // Make an AJAX request to the server
+                fetch('/get-data-had')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update your webpage with the received data
+                        const outputLog = document.getElementById("output-log");
+                        const logEntry = document.createElement("p");
+                        logEntry.textContent = data.message;
+                        outputLog.appendChild(logEntry);
+
+                        // Scroll to the bottom to show the latest entry
+                        outputLog.scrollTop = outputLog.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                    });
+            }
+
+            // Fetch data every second
+            setInterval(fetchData, 1000);
+        </script>
+    </center>
+</body>
+</html>

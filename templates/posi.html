@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/posi.css">
+    <title>Threat Olympus</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1, h2 {
+        color: #333;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    .results-tab {
+        background-color: #282c34; /* Dark background color */
+        color: #fff; /* Text color on the dark background */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        overflow: auto;
+        max-height: 600px; /* Limit the height of the results tab */
+    }
+
+     #output-log {
+         overflow-y: scroll;
+         height: 200px; /* Set a height to make it scrollable */
+         border: 1px solid #ccc;
+         padding: 10px;
+     }
+
+    pre {
+        white-space: pre-wrap; /* Allows text to wrap */
+        overflow: auto;
+        max-height: 300px; /* Limit the height of the results tab */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img href="index.html" src="../static/images/posi.png" alt="POSEIDEN"></a>
+        <h2>POSEIDEN<br>Network Threat Hunter</h2>
+    </header>
+    <hr style="border: none; border-top: 3px solid black;">
+    <desc>
+        <h3>Introduction:</h3>
+        <p>
+            Poseiden is a network-level threat hunter that uses a rule engine to assist it identify uncertain patterns<br>
+            in networks while keeping an eye out for any suspicious activity.
+        </p>
+        <h3>Usage:</h3>
+        <p>
+            - You have to select the Interface on which you want to run Poseiden.<br>
+            - You can type your rules or can upload text file containing rules here
+        </p>
+        <form id="captureForm" action="/posied0n" method="post">
+            <label for="interface">Select Interface:</label>
+            <select id="interface" name="interface" required>
+                <!-- Options will be dynamically populated using JavaScript -->
+            </select>
+            <button type="submit">Start Packet Capture</button>
+        </form>
+        <div id="output-log" class="results-tab">
+            <h3 color="white">Results:</h3>
+            <pre>{{.result}}</pre>
+        </div>
+        <script>
+            // Fetch and populate the interface options
+            fetch("/interfaces")
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById("interface");
+
+                    data.interfaces.forEach(interface => {
+                        const option = document.createElement("option");
+                        option.value = interface;
+                        option.text = interface;
+                        select.add(option);
+                    });
+                })
+                .catch(error => console.error("Error fetching interfaces:", error));
+
+
+        </script>
+        <script>
+            function fetchData() {
+                // Make an AJAX request to the server
+                fetch('/get-data-pos')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update your webpage with the received data
+                        const outputLog = document.getElementById("output-log");
+                        const logEntry = document.createElement("p");
+                        logEntry.textContent = data.message;
+                        outputLog.appendChild(logEntry);
+
+                        // Scroll to the bottom to show the latest entry
+                        outputLog.scrollTop = outputLog.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                    });
+            }
+
+            // Fetch data every second
+            setInterval(fetchData, 1000);
+        </script>
+    </desc>
+<center>
+    <footer>
+        <hr style="border: none; border-top: 3px solid black; width: auto;">
+        <h4>CREATED BY <br>TEAM THREAT-OLYMPUS</h4>
+        <a href="https://github.com/Threat-Olympus"><img src="../static/images/GitHub.png" alt="GitHub" height="50px" width="50px"></a>
+    </footer>
+</center>
+</body>
+</html>

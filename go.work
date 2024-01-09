@@ -1,0 +1,11 @@
+go 1.21.5
+
+use (
+	.
+	//./tools/hades
+	//./tools/hades/modules
+	./tools/z3us
+	./tools/z3us/threat
+	./tools/posied0n
+	tools/hades
+)

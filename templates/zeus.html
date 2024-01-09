@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/zeus.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        #results-tab {
+            background-color: #282c34; /* Dark background color */
+            color: #fff; /* Text color on the dark background */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow: auto;
+            max-height: 600px; /* Limit the height of the results tab */
+        }
+
+        pre {
+            white-space: pre-wrap; /* Allows text to wrap */
+            overflow: auto;
+            max-height: 300px; /* Limit the height of the results tab */
+        }
+    </style>
+    <title>Threat Olympus</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="../static/images/zeus.png" alt="ZEUS"></a>
+        <h2>ZEUS<br>Web-App Threat Hunter</h2>
+    </header>
+    <hr style="border: none; border-top: 3px solid black;">
+    <desc>
+        <h3>Introduction:</h3>
+        <p>
+            Zeus is a threat finder/detector for web applications that looks for any possible security flaws in your program.<br>
+            It will do a scan on the provided URL, searching for the most common vulnerabilities at the moment,<br>
+            such as outdated components, insecure design, broken access control, etc.
+        </p>
+        <h3>Usage:</h3>
+
+        <p>
+            We made it easy to use for our users you just have to provide the target url in the input bar given below
+        </p>
+        <form action="/zeus" method="post">
+            <input type="url" id="url" name="url" placeholder="Enter Targer URL" required>
+            <input type="text" id="paths" name="paths" placeholder="Enter Targer paths in URL to check for" required>
+            <button type="submit">Run Scan</button>
+          </form>
+        <div id="results-tab">
+            <h3 color="white">Results:</h3>
+            <pre>{{.result}}</pre>
+        </div>
+    </desc>
+    <center>
+        <footer>
+            <hr style="border: none; border-top: 3px solid black;">
+            <h4>CREATED BY <br>TEAM THREAT-OLYMPUS</h4>
+            <a href="https://github.com/Threat-Olympus"><img src="../static/images/GitHub.png" alt="GitHub" height="50px" width="50px"></a>
+        </footer>
+    </center>
+</body>
+</html>

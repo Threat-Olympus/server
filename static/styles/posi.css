@@ -1,0 +1,72 @@
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+header img{
+  max-width: 200px; 
+  margin-right: 5px;
+  margin-left: 50px;
+}
+
+header h2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 42px;
+}
+desc{
+  margin-left: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+desc h3{
+    font-size: 32px;
+    text-decoration: underline;
+}
+desc p{
+    font-size: 30px;
+}
+desc h3,p{
+    margin-left: 20px;
+}
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin: 10px 0;
+    font-size: 20px;
+  }
+
+  select,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;
+  }
+
+  input[type="file"] {
+    margin-bottom: 16px;
+  }
+
+  button {
+    background-color: royalblue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #4569b8;
+  }
